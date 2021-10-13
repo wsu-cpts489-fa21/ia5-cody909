@@ -11,6 +11,7 @@ export default function WeatherObservations() {
     stationCount: 0,
   });
 
+  const [lgShow, setLgShow] = useState(false);
   const [input, setInput] = useState("");
 
   const downButtonIcon = <FontAwesomeIcon icon={faAngleDown}></FontAwesomeIcon>;
@@ -46,27 +47,14 @@ export default function WeatherObservations() {
   };
 
   useEffect(() => {
-    setUserStations();
+    getUserLocation()
   }, []);
 
   const getUserLocation = async () => {
     await navigator.geolocation.getCurrentPosition(getLocSuccess, getLocError);
   };
 
-  const setUserStations = () => {
-    const userDataJSON = localStorage.getItem('cody@gmail.com');
-    const userData = JSON.parse(userDataJSON);
-    const userStations = userData.weatherStations;
-    if(userStations.length >= 1){
-      const count = userStations[userStations.length - 1].stationId
-      setStationsInfo({
-        stations: userStations,
-        stationCount: count,
-      })
-    } else {
-      getUserLocation()
-    }
-  }
+
 
   const addStation = async (newStation) => {
     if (newStation != null) {
@@ -98,22 +86,54 @@ export default function WeatherObservations() {
         alert("Sorry, that weather location could not be found.");
       }
     }
+    setLgShow(false);
   };
 
   const showDialog = () => {
-
+    setLgShow(true);
   };
 
   const deleteWeatherStation = (stationIndex) => {
-
+    const currentCount = stationsInfo.stationCount;
+    const newStations = [...stationsInfo.stations];
+    newStations.splice(stationIndex, stationIndex);
+    setStationsInfo({
+      stations: newStations,
+      stationCount: currentCount,
+    });
+    localStorage.setItem('cody@gmail.com', JSON.stringify({
+      password: 'password123',
+      weatherStations: newStations}))
   };
 
   const moveWeatherStationUp = (stationIndex) => {
+    if(stationIndex !== 0) {
+      const currentCount = stationsInfo.stationCount;
+      var newStations = [...stationsInfo.stations];
+      var station = newStations[stationIndex];
+      newStations[stationIndex] = newStations[stationIndex - 1];
+      newStations[stationIndex - 1] = station;
 
+      setStationsInfo({
+        stations: newStations,
+        stationCount: currentCount
+      })
+    }
   }
 
   const moveWeatherStationDown = (stationIndex) => {
+    if(stationIndex !== stationsInfo.stations.length - 1) {
+      const currentCount = stationsInfo.stationCount;
+      var newStations = [...stationsInfo.stations];
+      var station = newStations[stationIndex];
+      newStations[stationIndex] = newStations[stationIndex + 1];
+      newStations[stationIndex + 1] = station;
 
+      setStationsInfo({
+        stations: newStations,
+        stationCount: currentCount
+      })
+    }
   }
 
   let rows = [];
@@ -127,11 +147,48 @@ export default function WeatherObservations() {
             longitude={stationsInfo.stations[i].lon}
             stationId={stationsInfo.stations[i].stationId}
           />
+          <button onClick={() => deleteWeatherStation(i)}>
+            {deleteButtonIcon}
+          </button>
+          <button onClick={() => moveWeatherStationUp(i)}>
+            {upButtonIcon}
+          </button>
+          <button onClick={() => moveWeatherStationDown(i)}>
+            {downButtonIcon}
+            </button>
         </div>
       );
     }
     return (
       <div>
+        <Modal
+          size="lg"
+          show={lgShow}
+          onHide={() => setLgShow(false)}
+          aria-labelledby="example-modal-sizes-title-lg"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="example-modal-sizes-title-lg">
+              Enter a city, state, and country
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <input
+              type="text"
+              onChange={(e) => {
+                setInput(e.target.value);
+              }}
+            ></input>
+            <button
+              id="button"
+              onClick={() => {
+                addStation(input);
+              }}
+            >
+              Add
+            </button>
+          </Modal.Body>
+        </Modal>
         {rows}
         <button className="float" id="addStationBtn" onClick={showDialog}>
           {addStationButtonIcon}
