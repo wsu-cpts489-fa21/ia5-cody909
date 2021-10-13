@@ -1,38 +1,59 @@
-.App {
+/* Style the floating action button, which is fixed in the lower right of the app */
+.float{
+  position:fixed;
+  width:60px;
+  height:60px;
+  bottom:60px;
+  right:40px;
+  background-color:black;
+  color:white;
+  border-radius:50px;
+  text-align:center;
+  box-shadow: 2px 2px 3px #999;
+  cursor: pointer;
+}
+
+/* Style for the sign out button, which is fixed in the upper left of the app */
+.signout{
+  position:fixed;
+  width:60px;
+  height:60px;
+  bottom:140px;
+  right:40px;
+  background-color:black;
+  color:white;
+  border-radius:50px;
+  text-align:center;
+  box-shadow: 2px 2px 3px #999;
+  cursor: pointer;
+}
+
+.form-input{
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.login-page-container{
+  padding: 5 px;
   text-align: center;
+  vertical-align: middle;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+/* Style for the floating button icon, which should be centered within the button */
+.float-btn-icon{
+  vertical-align: middle;
   color: white;
+  font-size: 24px;
 }
 
-.App-link {
-  color: #61dafb;
+/* Style to center weather stations */
+.ws-centered {
+  text-align: center; 
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Style to pad weather stations */
+.ws-padding {
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
