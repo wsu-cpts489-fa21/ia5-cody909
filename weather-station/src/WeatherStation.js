@@ -138,7 +138,7 @@ export default function WeatherStation(props) {
     <section className="jumbotron ws-centered ws-padding">
       <h1>Weather Conditions at {observations.place}</h1>
       <p>
-  <i>Last updated: {observations.retrieved}</i>
+  <i>Last updated: {observations.retrieved} <button onClick={getCurrentObservations}>{refreshIcon}</button></i>
       </p>
       <p>Conditions: {observations.conditions}</p>
       <p>
