@@ -47,14 +47,27 @@ export default function WeatherObservations() {
   };
 
   useEffect(() => {
-    getUserLocation()
+    setUserStations();
   }, []);
 
   const getUserLocation = async () => {
     await navigator.geolocation.getCurrentPosition(getLocSuccess, getLocError);
   };
 
-
+  const setUserStations = () => {
+    const userDataJSON = localStorage.getItem('cody@gmail.com');
+    const userData = JSON.parse(userDataJSON);
+    const userStations = userData.weatherStations;
+    if(userStations.length >= 1){
+      const count = userStations[userStations.length - 1].stationId
+      setStationsInfo({
+        stations: userStations,
+        stationCount: count,
+      })
+    } else {
+      getUserLocation()
+    }
+  }
 
   const addStation = async (newStation) => {
     if (newStation != null) {
@@ -193,6 +206,7 @@ export default function WeatherObservations() {
         <button className="float" id="addStationBtn" onClick={showDialog}>
           {addStationButtonIcon}
         </button>
+        {/* { show ? <h1 show={show}>Am I hidden ? </h1> : null} */}
       </div>
     );
   } else {
