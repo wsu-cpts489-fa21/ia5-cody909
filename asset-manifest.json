@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/ia5-cody909/weather-station/static/css/main.c0296d03.chunk.css",
+    "main.js": "/ia5-cody909/weather-station/static/js/main.4ea3b122.chunk.js",
+    "main.js.map": "/ia5-cody909/weather-station/static/js/main.4ea3b122.chunk.js.map",
+    "runtime-main.js": "/ia5-cody909/weather-station/static/js/runtime-main.476afdf7.js",
+    "runtime-main.js.map": "/ia5-cody909/weather-station/static/js/runtime-main.476afdf7.js.map",
+    "static/js/2.2cb75733.chunk.js": "/ia5-cody909/weather-station/static/js/2.2cb75733.chunk.js",
+    "static/js/2.2cb75733.chunk.js.map": "/ia5-cody909/weather-station/static/js/2.2cb75733.chunk.js.map",
+    "static/js/3.88f97f00.chunk.js": "/ia5-cody909/weather-station/static/js/3.88f97f00.chunk.js",
+    "static/js/3.88f97f00.chunk.js.map": "/ia5-cody909/weather-station/static/js/3.88f97f00.chunk.js.map",
+    "index.html": "/ia5-cody909/weather-station/index.html",
+    "static/css/main.c0296d03.chunk.css.map": "/ia5-cody909/weather-station/static/css/main.c0296d03.chunk.css.map",
+    "static/js/2.2cb75733.chunk.js.LICENSE.txt": "/ia5-cody909/weather-station/static/js/2.2cb75733.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.476afdf7.js",
+    "static/js/2.2cb75733.chunk.js",
+    "static/css/main.c0296d03.chunk.css",
+    "static/js/main.4ea3b122.chunk.js"
+  ]
+}
