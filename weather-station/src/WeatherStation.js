@@ -40,12 +40,6 @@ export default function WeatherStation(props) {
     windDirectionUnit: "",
   });
 
-  // const [stationProperties, setStationProperties] = useState({
-  //   gridId: "",
-  //   gridX: 0,
-  //   gridY: 80,
-  // });
-
   const getCurrentObservations = async () => {
     const response = await fetch(
       "http://api.openweathermap.org/data/2.5/weather?lat=" +
@@ -55,6 +49,7 @@ export default function WeatherStation(props) {
         "&appid=f763b34d246506fdbef713181cc24c56"
     );
     const currWeather = await response.json();
+    if(units === "metric"){
     setObservations({
       place: currWeather.name,
       retrieved:
@@ -71,7 +66,25 @@ export default function WeatherStation(props) {
       windUnit: "Meters/sec",
       windDirection: currWeather.wind.deg,
       windDirectionUnit: "Degrees",
-    });
+    });} else {
+        setObservations({
+            place: currWeather.name,
+            retrieved:
+              new Date().toLocaleDateString() +
+              " at " +
+              new Date().toLocaleTimeString(),
+            conditions: currWeather.weather[0].main,
+            visibilityUnit: "Feet",
+            temp: Math.round((currWeather.main.temp - 273.15) * 9 / 5 + 32),
+            tempUnit: "F",
+            humidity: currWeather.main.humidity,
+            visibility: Math.round(currWeather.visibility * 3.281),
+            wind: Math.round(currWeather.wind.speed * 3.281),
+            windUnit: "Feet/sec",
+            windDirection: currWeather.wind.deg,
+            windDirectionUnit: "Degrees",
+          });
+    }
     setMetricObservations({
       place: currWeather.name,
       retrieved:
@@ -91,21 +104,9 @@ export default function WeatherStation(props) {
     });
   };
 
-  // const getGridPoints = async () => {
-  //   const response = await fetch(
-  //     "https://api.weather.gov/points/" + latitude + "," + longitude
-  //   );
-  //   const gridPoints = await response.json();
-  //   setStationProperties({
-  //     stationId: gridPoints.properties.gridId,
-  //     gridX: gridPoints.properties.gridX,
-  //     gridY: gridPoints.properties.gridY,
-  //   });
-  // };
 
   useEffect(() => {
     getCurrentObservations();
-    //getGridPoints();
   }, []);
 
   const toggleUnits = () => {units === "imperial" ? switchToMetric() : switchToImperial();}
@@ -128,9 +129,10 @@ export default function WeatherStation(props) {
     setUnits("metric");
   }
 
-  const refresh = () => {
+  const refresh = async() => {
     if(units === "imperial") {
-
+        getCurrentObservations()
+    } else {
     }
 }
 

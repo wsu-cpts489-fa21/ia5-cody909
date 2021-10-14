@@ -206,7 +206,6 @@ export default function WeatherObservations() {
         <button className="float" id="addStationBtn" onClick={showDialog}>
           {addStationButtonIcon}
         </button>
-        {/* { show ? <h1 show={show}>Am I hidden ? </h1> : null} */}
       </div>
     );
   } else {
