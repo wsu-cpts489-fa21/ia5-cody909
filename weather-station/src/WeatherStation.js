@@ -129,13 +129,6 @@ export default function WeatherStation(props) {
     setUnits("metric");
   }
 
-  const refresh = async() => {
-    if(units === "imperial") {
-        getCurrentObservations()
-    } else {
-    }
-}
-
   return (
     <section className="jumbotron ws-centered ws-padding">
       <h1>Weather Conditions at {observations.place}</h1>
